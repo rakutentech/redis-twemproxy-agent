@@ -1,0 +1,20 @@
+var cli = require('cli'),
+    Agent = require('./agent');
+
+cli.parse({
+  host:    ['h', 'Redis sentinel hostname', 'string', <%= @twemproxy_conf['sentinel']['addr'] %>],
+  port:    ['p', 'Redis sentinel port number', 'number', <%= @twemproxy_conf['sentinel']['port'] %> ],
+  config:  ['f', 'Path to twemproxy config', 'path', <%= @twemproxy_conf['twemproxy']['conf_path'] %> ],
+  command: ['c', 'Command to restart twemproxy', 'string', <%= @twemproxy_conf['twemproxy']['restart_cmd'] %> ],
+  log:	   ['l', 'The log file location', 'string', <%= @log %> ]
+});
+
+cli.main(function (args, options) {
+  var config = { nutcracker_config_file: options.config,
+                 redis_sentinel_ip:      options.host,
+                 redis_sentinel_port:    options.port,
+                 restart_command:        options.command, 
+		 log_file:		 options.log };
+
+  Agent.bootstrap(config);
+});

@@ -1,0 +1,10 @@
+name             'redis-twemproxy-agent'
+maintainer       'Rakuten, Inc.'
+maintainer_email 'ops@rakops.com'
+license          'Apache 2.0'
+description      'Installs/Configures redis-twemproxy-agent'
+long_description 'Installs/Configures redis-twemproxy-agent'
+version          '0.1.0'
+
+depends 'nodejs'
+depends 'apt'
