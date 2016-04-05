@@ -37,3 +37,8 @@ template '/etc/init.d/redis-twemproxy-agent' do
 	group node['redis-twemproxy-agent']['group']
 	variables ({ :path => node['redis-twemproxy-agent']['source_dir'] })
 end
+
+service 'redis-twemproxy-agent' do
+	provider Chef::Provider::Service::Init
+	action :start
+end
