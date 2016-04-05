@@ -21,7 +21,6 @@ apt_package 'git-core' do
 	action :install
 end
 
-node.set['nodejs']['install_method'] = node['redis-twemproxy-agent']['node']['install_method']
 node.set['nodejs']['npm_packages'] = node['redis-twemproxy-agent']['node']['npm_packages']
 
 include_recipe 'nodejs'

@@ -17,16 +17,16 @@
 # limitations under the License.
 #
 
-cli_path = File.join(node['redis-twemproxy-agent']['source_dir'], '/lib')
+cli_path = File.join(node['redis-twemproxy-agent']['source_dir'], '/lib/cli.js')
 log_file = File.join(node['redis-twemproxy-agent']['log_dir'], '/twemproxy.log')
 
 # Create the cli file for the agent
-template 'cli_path' do
+template "#{cli_path}" do
 	source 'cli.erb'
 	mode '0755'
 	variables ({
 				:twemproxy_conf => node['redis-twemproxy-agent']['twemproxy_conf'], 
-		        :log => log_file
+		        :log => "\'#{log_file}\'"
 		      })
 end
 

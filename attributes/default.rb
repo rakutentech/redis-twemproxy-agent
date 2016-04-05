@@ -19,22 +19,42 @@
 # node js configuration settings
 default['redis-twemproxy-agent']['node']['install_method'] = 'source'
 default['redis-twemproxy-agent']['node']['npm_packages'] = [{
-	'name' => 'forever'
-}]
+		'name' => 'forever'
+	},
+	{
+		'name' => 'cli'
+	},
+	{
+		'name' => 'js-yaml'
+	},
+	{
+		'name' => 'underscore'
+	},
+	{
+		'name' => 'async'
+	},
+	{
+		'name' => 'redis'
+	}
+]
 
 # twemproxy-agent configuration
 default['redis-twemproxy-agent']['git_url'] = 'https://github.com/Stono/redis-twemproxy-agent.git' 
 default['redis-twemproxy-agent']['user'] = 'root'
 default['redis-twemproxy-agent']['group'] = 'root'
 default['redis-twemproxy-agent']['source_dir'] = '/opt/redis-twemproxy-agent'
-default['redis-twemproxy-agent']['log_dir'] = '/var/log/twemproxy/'
+default['redis-twemproxy-agent']['log_dir'] = '/var/log/'
+
+# Add quotes to be accepted in cli 
 default['redis-twemproxy-agent']['twemproxy_conf'] = {
-	'sentinel' => {
-		'address' => '127.0.0.1',
-		'port' => 26379
-	},
-	'twemproxy' => {
-		'conf_path' => '/etc/twemproxy/config.yml',
-		'restart_cmd' => 'service restart twemproxy'
+'sentinel' => {
+	'addr' => "\'127.0.0.1\'",
+	'port' => "\'26379\'"
+},
+'twemproxy' => {
+		'conf_path' => "\'/etc/twemproxy/config.yml\'",
+		'restart_cmd' => "\'service restart twemproxy\'"
 	} 
 }
+
+default['nodejs']['npm']['version'] = '1.4.21'
