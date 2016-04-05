@@ -12,7 +12,7 @@ ROOT=<%= @path %>
 EXEC="$ROOT/bin/redis_twemproxy_agent"
 USER='root'
 
-PID=`ps -aefw | grep node "$EXEC" | grep -v " grep " | awk '{print $2}'`
+PID=`ps -aefw | grep "$EXEC" | grep -v " grep " | awk '{print $2}'`
 USER=root
 
 case "$1" in

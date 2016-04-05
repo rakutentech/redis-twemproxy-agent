@@ -18,7 +18,7 @@
 #
 
 cli_path = File.join(node['redis-twemproxy-agent']['source_dir'], '/lib/cli.js')
-log_file = File.join(node['redis-twemproxy-agent']['log_dir'], '/twemproxy.log')
+log_file = File.join(node['redis-twemproxy-agent']['log_dir'], '/twemproxy-agent.log')
 
 # Create the cli file for the agent
 template "#{cli_path}" do
