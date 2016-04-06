@@ -69,4 +69,4 @@ Include `redis-twemproxy-agent` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: Chandrika Parimoo | Rakuten, Inc. (<chandrika@rakops.com>)
+Author:: Chandrika Parimoo | Rakuten, Inc. (<chandrika.parimoo@rakops.com>)

@@ -22,23 +22,23 @@ log_file = File.join(node['redis-twemproxy-agent']['log_dir'], '/twemproxy-agent
 
 # Create the cli file for the agent
 template "#{cli_path}" do
-	source 'cli.erb'
-	mode '0755'
-	variables ({
-				:twemproxy_conf => node['redis-twemproxy-agent']['twemproxy_conf'], 
-		        :log => "\'#{log_file}\'"
-		      })
+  source 'cli.erb'
+  mode '0755'
+  variables(
+    'twemproxy_conf' => node['redis-twemproxy-agent']['twemproxy_conf'],
+    'log' => "\'#{log_file}\'"
+  )
 end
 
 template '/etc/init.d/redis-twemproxy-agent' do
-	source 'agent_init.erb'
-	mode '0755'
-	user node['redis-twemproxy-agent']['user']
-	group node['redis-twemproxy-agent']['group']
-	variables ({ :path => node['redis-twemproxy-agent']['source_dir'] })
+  source 'agent_init.erb'
+  mode '0755'
+  user node['redis-twemproxy-agent']['user']
+  group node['redis-twemproxy-agent']['group']
+  variables('path' => node['redis-twemproxy-agent']['source_dir'])
 end
 
 service 'redis-twemproxy-agent' do
-	provider Chef::Provider::Service::Init
-	action :start
+  provider Chef::Provider::Service::Init
+  action :start
 end
