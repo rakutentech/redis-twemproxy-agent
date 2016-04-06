@@ -21,7 +21,20 @@ apt_package 'git-core' do
 	action :install
 end
 
-node.set['nodejs']['npm_packages'] = node['redis-twemproxy-agent']['node']['npm_packages']
+# Install npm packages in the agent source directory
+source_dir = node['redis-twemproxy-agent']['source_dir']
+# npm_packages =[]
+# node['redis-twemproxy-agent']['node']['npm_packages'].each do |pkg|
+# 	 npm_packages << {
+# 		'name ' => pkg,
+# 		'path' => source_dir
+# 	}
+# end
+
+# Chef::Log.warn("#{npm_packages}")
+
+# #node.set['nodejs']['npm']['version'] = node['redis-twemproxy-agent']['nodejs']['npm_version']
+# node.set['nodejs']['npm_packages'] = "#{npm_packages}"
 
 include_recipe 'nodejs'
 
@@ -31,10 +44,22 @@ directory node['redis-twemproxy-agent']['source_dir'] do
   action :create
 end
 
+# get redis-twemproxy-agent
 git 'redis-twemproxy-agent' do
   destination node['redis-twemproxy-agent']['source_dir']
   repository node['redis-twemproxy-agent']['git_url']
   reference 'master'
   user node['redis-twemproxy-agent']['user']
   group node['redis-twemproxy-agent']['group']
+end
+
+# Install forever package globally
+nodejs_npm 'forever' do
+	user node['redis-twemproxy-agent']['user']
+end
+
+node['redis-twemproxy-agent']['node']['npm_packages'].each do |pkg|
+	nodejs_npm pkg do
+		path source_dir
+	end
 end

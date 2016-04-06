@@ -17,7 +17,7 @@ USER=root
 
 case "$1" in
     start)
-        if [ ! -z $PID ]
+        if [ ! -z "$PID" ]
         then
                 echo "TwemProxy Redis Sentinel Agent is already running!"
         else
@@ -27,18 +27,18 @@ case "$1" in
         fi
         ;;
     stop)
-        if [ -z $PID ]
+        if [ -z "$PID" ]
         then
                 echo "TwemProxy Redis Sentinel Agent is not running"
         else
                 echo "Stopping TwemProxy Redis Sentinel Agent"
-                su -c "$FOREVER stop $EXEC" $USER
+                su -c "forever stop $EXEC" $USER
                 echo "TwemProxy Redis Sentinel Agent stopped."
         fi
         ;;
 
     restart)
-        if [ -z $PID ]
+        if [ -z "$PID" ]
         then
                 /etc/init.d/twemproxy_sentinel start
         else
