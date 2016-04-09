@@ -8,7 +8,7 @@ Cookbook to set up [redis-twemproxy agent](https://github.com/Stono/redis-twempr
 
 ## Attributes
 
-
+```
 default['redis-twemproxy-agent']['twemproxy_conf'] = {
 'sentinel' => {
   'addr' => "\'127.0.0.1\'",
@@ -19,6 +19,7 @@ default['redis-twemproxy-agent']['twemproxy_conf'] = {
     'restart_cmd' => "\'service restart twemproxy\'"
   } 
 }
+```
 
 <table>
   <tr>
